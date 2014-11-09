@@ -17,8 +17,7 @@ public class Fen2Chessboard {
 	@Produces({MediaType.TEXT_PLAIN})
 	public Object getDiagram(@PathParam("fen") String strFen) throws Fen2ChessboardException {
 		final Fen fen = Fen.fromPath(strFen);
-		
-		return "OK";
+		return fen.toString();
 	}
 	
 }

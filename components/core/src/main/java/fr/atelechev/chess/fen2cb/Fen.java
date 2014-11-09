@@ -6,6 +6,8 @@ import fr.atelechev.util.Objects;
 
 
 public class Fen {
+	
+	private static final String LINE = "---------------------------------\n";
 
 	private final char[][] rows;
 	
@@ -76,6 +78,64 @@ public class Fen {
 		}
 		bld.append("w");
 		return bld.toString();
+	}
+	
+	@Override
+	public String toString() {
+		final StringBuilder bld = new StringBuilder(LINE.length() * 17).append(LINE);
+		final char[][] rowsForView;
+		if (this.side == Side.WHITE) {
+			rowsForView = this.rows;
+		}
+		else {
+			rowsForView = getReversedRows();
+		}
+		for (char[] row : rowsForView) {
+			bld.append(rowToString(row)).append(LINE);
+		}
+		return bld.toString();
+	}
+	
+	private char[][] getReversedRows() {
+		final char[][] reversedRows = new char[8][];
+		for (int i = 0; i < 8; i++) {
+			reversedRows[i] = reverseArray(this.rows[7 - i]);
+		}
+		return reversedRows;
+	}
+
+	private char[] reverseArray(char[] row) {
+		assert row != null;
+		final char[] reversed = new char[row.length];
+		for (int i = 0; i < row.length; i++) {
+			reversed[i] = row[(row.length - 1) - i];
+		}
+		return reversed;
+	}
+
+	private String rowToString(char[] row) {
+		assert row != null;
+		final StringBuilder bld = new StringBuilder(40).append("|");
+		for (char c : row) {
+			if (Character.isDigit(c)) {
+				appendEmptyCells(Integer.parseInt(String.valueOf(c)), bld);
+			}
+			else {
+				bld.append(cellToString(c));
+			}
+		}
+		return bld.append("\n").toString();
+	}
+	
+	private void appendEmptyCells(int nbCells, StringBuilder bld) {
+		assert bld != null;
+		for (int i = 0; i < nbCells; i++) {
+			bld.append(cellToString(' '));
+		}
+	}
+	
+	private String cellToString(char piece) {
+		return String.format(" %1$s |", piece);
 	}
 	
 }
