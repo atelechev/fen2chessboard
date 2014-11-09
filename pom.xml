@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.atelechev.chess</groupId>
-	<artifactId>fen2diagram-aggregate</artifactId>
+	<artifactId>fen2chessboard-aggregate</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 

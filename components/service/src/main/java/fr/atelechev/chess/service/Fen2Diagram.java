@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("fen2diagram")
+@Path("fen2cb")
 public class Fen2Diagram {
 
 	@GET

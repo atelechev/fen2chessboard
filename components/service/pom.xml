@@ -3,14 +3,14 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>fen2diagram-rs</artifactId>
+	<artifactId>fen2chessboard-rs</artifactId>
 	<packaging>war</packaging>
 	<name>FEN2diagram Web Service</name>
 	<description>Provides a RESTful implementation of a Web service featuring chess diagrams from FEN strings</description>
 
 	<parent>
 		<groupId>fr.atelechev.chess</groupId>
-		<artifactId>fen2diagram-aggregate</artifactId>
+		<artifactId>fen2chessboard-aggregate</artifactId>
 		<version>0.1-SNAPSHOT</version>
 		<relativePath>../..</relativePath>
 	</parent>
@@ -29,7 +29,7 @@
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<server>Tomcat-localhost</server>
-					<path>/fen2diagram-rs</path>
+					<path>/fen2chessboard-rs</path>
 				</configuration>
 			</plugin>
 		</plugins>
