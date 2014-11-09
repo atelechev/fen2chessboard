@@ -17,6 +17,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<scala.version.major>2.10</scala.version.major>
+		<scala.version.minor>3</scala.version.minor>
+		<scalatest.version>2.0</scalatest.version>
 	</properties>
 
 	<build>
@@ -89,15 +92,20 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.scalatest</groupId>
-			<artifactId>scalatest_2.11</artifactId>
-			<version>2.2.0</version>
-			<scope>test</scope>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala.version.major}.${scala.version.minor}</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<groupId>org.scalatest</groupId>
+			<artifactId>scalatest_${scala.version.major}</artifactId>
+			<version>${scalatest.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+				</exclusion>
+			</exclusions>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
