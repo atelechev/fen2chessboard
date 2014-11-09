@@ -11,6 +11,7 @@
 	<description>Aggregate project for Java EE RESTful Web service allowing to generate chess diagrams from FEN strings</description>
 
 	<modules>
+		<module>components/core</module>
 	    <module>components/service</module>
 	</modules>
 

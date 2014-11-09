@@ -5,7 +5,7 @@
 
 	<artifactId>fen2chessboard-rs</artifactId>
 	<packaging>war</packaging>
-	<name>FEN2diagram Web Service</name>
+	<name>FEN2Chessboard Web Service</name>
 	<description>Provides a RESTful implementation of a Web service featuring chess diagrams from FEN strings</description>
 
 	<parent>
@@ -48,6 +48,11 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<dependency>
+			<groupId>fr.atelechev.chess</groupId>
+			<artifactId>fen2chessboard-core</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-servlet-core</artifactId>
