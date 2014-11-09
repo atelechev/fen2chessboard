@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>fen2diagram-rs</artifactId>
+	<packaging>war</packaging>
+	<name>FEN2diagram Web Service</name>
+	<description>Provides a RESTful implementation of a Web service featuring chess diagrams from FEN strings</description>
+
+	<parent>
+		<groupId>fr.atelechev.chess</groupId>
+		<artifactId>fen2diagram-aggregate</artifactId>
+		<version>0.1-SNAPSHOT</version>
+		<relativePath>../..</relativePath>
+	</parent>
+
+	<properties>
+		<jersey.version>2.13</jersey.version>
+	</properties>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<server>Tomcat-localhost</server>
+					<path>/fen2diagram-rs</path>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.glassfish.jersey</groupId>
+				<artifactId>jersey-bom</artifactId>
+				<version>${jersey.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+	</dependencies>
+
+</project>
