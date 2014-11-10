@@ -1,7 +1,5 @@
 package fr.atelechev.chess.fen2cb.style;
 
-import java.awt.Point;
-
 import fr.atelechev.util.Objects;
 
 public abstract class DiagramStyle {

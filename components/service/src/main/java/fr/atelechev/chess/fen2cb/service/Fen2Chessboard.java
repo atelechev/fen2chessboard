@@ -1,6 +1,7 @@
 package fr.atelechev.chess.fen2cb.service;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,9 +16,10 @@ public class Fen2Chessboard {
 	@GET
 	@Path("{fen: ([1-8prnbqkPRNBQK]{1,8}(/[1-8prnbqkPRNBQK]{1,8}){7})(/[wWbB])?}")
 	@Produces({MediaType.TEXT_PLAIN})
-	public Object getDiagram(@PathParam("fen") String strFen) throws Fen2ChessboardException {
+	public Object getDiagram(@PathParam("fen") String strFen,
+							 @MatrixParam("size") int size) throws Fen2ChessboardException {
 		final Fen fen = Fen.fromPath(strFen);
-		return fen.toString();
+		return fen.toString() + "\n\tsize=" + size;
 	}
 	
 }

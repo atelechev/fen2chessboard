@@ -6,7 +6,6 @@ import org.scalatest.Matchers.not
 import org.scalatest.Matchers.convertToAnyShouldWrapper
 import fr.atelechev.util.ExpectedExceptionCatcher
 import java.nio.file.Paths
-import java.awt.Point
 
 class DiagramStyleFactoryTestSuite extends FlatSpec
 									  with ExpectedExceptionCatcher

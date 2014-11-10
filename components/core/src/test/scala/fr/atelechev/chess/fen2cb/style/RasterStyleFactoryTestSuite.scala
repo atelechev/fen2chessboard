@@ -2,7 +2,6 @@ package fr.atelechev.chess.fen2cb.style
 
 import org.scalatest.FlatSpec
 import fr.atelechev.util.ExpectedExceptionCatcher
-import java.awt.Point
 
 class RasterStyleFactoryTestSuite extends FlatSpec
 									 with ExpectedExceptionCatcher

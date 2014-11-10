@@ -1,12 +1,12 @@
 package fr.atelechev.chess.fen2cb.style;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -35,7 +35,9 @@ class RasterStyleFactory {
 	private RasterStyle build() {
 		final BufferedImage board = readBoard();
 		final Map<Piece, BufferedImage> pieces = readPieces();
-		final RasterStyle style = new RasterStyle(this.styleName, board, pieces);
+		final RasterStyle style = new RasterStyle(this.styleName, 
+												  board, 
+												  Collections.unmodifiableMap(pieces));
 		style.setCellsOrigin(this.padding);
 		style.setOverlayOrigin(this.overlay);
 		return style;

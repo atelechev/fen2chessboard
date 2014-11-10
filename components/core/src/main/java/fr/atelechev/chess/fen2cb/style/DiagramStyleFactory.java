@@ -1,6 +1,5 @@
 package fr.atelechev.chess.fen2cb.style;
 
-import java.awt.Point;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
