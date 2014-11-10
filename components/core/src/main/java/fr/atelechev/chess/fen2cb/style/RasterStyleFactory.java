@@ -1,6 +1,5 @@
 package fr.atelechev.chess.fen2cb.style;
 
-import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
