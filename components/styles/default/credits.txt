@@ -1,0 +1,1 @@
+The default chess pieces set was built from the freeware TTF chess font "Cases", available at http://www.enpassant.dk/chess/fonteng.htm and http://www.enpassant.dk/chess/fontimg/cases.htm
