@@ -100,3 +100,132 @@ Invalid size: 10000. Must be between 0 and 2048.
 
 <code>size=0</code> is interpreted as default size, which corresponds to the size of the source chess board image.
 
+
+<h3>Installation</h3>
+
+Pre-requisites:
+
+* Java 8
+* Maven 3
+* Apache Tomcat instance, or any other Web application container capable to deploy <code>.war</code> files. The application has been developed and tested using Tomcat 7.
+
+Steps:
+
+1) Check out the project code, as you are used to on GitHub.
+
+2) Switch to the project folder and type
+
+```
+mvn clean install
+```
+
+The output should succeed with something like
+
+```
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] FEN to Chess Diagram Web Service .................. SUCCESS [  1.087 s]
+[INFO] FEN2Chessboard Core Library ....................... SUCCESS [  8.311 s]
+[INFO] FEN2Chessboard Web Service ........................ SUCCESS [  3.119 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12.642 s
+[INFO] Finished at: 2014-11-11T15:58:19+01:00
+[INFO] Final Memory: 22M/325M
+[INFO] ------------------------------------------------------------------------
+```
+
+3) Copy the <code>components/styles</code> folder into the <code>lib/fen2chessboard</code> folder in your Tomcat. This should result in the following folders structure:
+
+```
+{TOMCAT_HOME}
+├── bin
+├── conf
+├── lib
+│   └── fen2chessboard
+│       └── styles
+│           ├── default
+│           ├── leipzig
+│           └── wiki
+├── logs
+├── temp
+├── webapps
+├── work
+```
+
+4) Put a <code>log4j.properties</code> file in <code>{TOMCAT_HOME}/lib</code>, if you want some logging features (may be useful for tracing server-side errors).
+
+5) Ensure that your Tomcat is running. Deploy the web application from <code>components/service/target/fen2chessboard-rs.war</code> using your favorite method.
+You may deploy it using the Maven command
+
+```
+mvn tomcat7:undeploy tomcat7:deploy
+```
+Please check the respective Maven plugin configuration in <code>components/service/pom.xml</code>.
+
+Your application instance should be functional now.
+
+<h3>Styles Conventions</h3>
+
+You may configure your own styles, or even edit the existing ones at any moment, without the need to make any changes in the application code.
+
+If you change an existing style, this will require a restart of the application, because style data are read lazily on the first access and then cached in the memory in order to avoid multiple disk I/O.
+
+The style conventions are the following.
+
+1) To add a new style, simply create a folder under <code>fen2chessboard/styles</code>. The name of the folder may contain only alphanumeric characters and underscores. The name 'text' is reserved for ASCII style, so it should not be used.
+
+2) Currently, only raster output is supported by the application. All image files are expected to be in <code>.png</code> format. This format is chosen because it supports transparency, which is very useful in our context.
+
+3) All file names are supposed to be in lower case.
+
+4) <code>board.png</code> file must contain an image with an empty chess board, for example:
+
+![Empty board](/docs/images/diagram_empty.png?raw=true "board.png example")
+
+5) The squares must be of same size in the board image.
+
+6) The width and the height of the board image should be equal. I.e. it should be a square.
+
+7) The board may contain margins. If there is a margin at the top or at the left side, they must be declared in <code>diagram.properties</code> (see below). An example of a board with margins is in 'leipzig' style:
+
+![Empty board with margins](/docs/images/diagram_empty_leipzig.png?raw=true "board.png example 2")
+
+8) The following files must be present in the folder with the style:
+
+```
+├── black_bishop.png
+├── black_king.png
+├── black_knight.png
+├── black_pawn.png
+├── black_queen.png
+├── black_rook.png
+├── white_bishop.png
+├── white_king.png
+├── white_knight.png
+├── white_pawn.png
+├── white_queen.png
+└── white_rook.png
+```
+
+These files contain images with chess pieces, their names are explicit.
+The size of all the piece images must be the same. For example, in the default style, all the <code>black_*</code> and <code>white_*</code> images have the size of 108x108 pixels.
+If this is not respected, the style will not be initialized properly.
+The size of all of these images must also be the same as the size of a square in the empty board image.
+
+9) Add into the folder a configuration file named <code>diagram.properties</code>, with the following key-value pairs:
+
+```
+render.type=raster
+padding.top=0
+padding.left=0
+overlay.x=
+overlay.y=
+``` 
+
+Please check the comments for these values in any of the <code>diagram.properties</code> files in the style folders provided with the application.
+
+10) If you want to add an overlay image to your diagram (logo or watermark, like _Test diagram_ in the default style), you may add a file named <code>overlay.png</code> into the folder of your style. The position of the overlay image is defined using the <code>overlay.x</code> and <code>overlay.y</code> values in the configuration file. It is calculated in pixels relatively to the top left corner of the <code>board.png</code> file.
+
