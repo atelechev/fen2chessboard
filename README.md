@@ -7,7 +7,7 @@ It runs as a RESTful Web service: you provide your FEN string in the URL, as wel
 
 For example:
 
-The application runs at http://localhost:8080/fen2chessboard-rs
+The application runs at http://localhost:8080/fen2chessboard-rs/fen2cb
 
 The FEN string for the starting position in chess is
 
@@ -24,11 +24,12 @@ And you get the image:
 
 *TODO*: add the image
 
-Please note that only the part of FEN describing the position is used in the URL. The side to move ('w' or 'b') element may be used to flip the view. Other FEN items (castling, en passant) are not used.
+Please note that only the part of FEN that describes the position is used in the URL. The side to move ('w' or 'b') element may be used to flip the view. Other FEN items (castling, en passant) are not used.
+
 
 <h3>Options</h3>
 
-* Flip the board by adding <code>/b</code> or <code>/B</code> to the URL. Default is the view for White (<code>/w</code> or <code>/W</code> is implicit at the end of the URL).
+* Flip the board by adding <code>/b</code> or <code>/B</code> to the URL. Default is the view for White (<code>/w</code> or <code>/W</code> is implicit at the end of the URL, but may be added).
 
 * Request a specific size of the image by adding <code>;size=X</code> to the URL, where <code>X</code> is the number of pixels for the height or the width of the diagram. Diagrams are square, so there is no need to have two parameters for that.
 
@@ -36,16 +37,18 @@ Please note that only the part of FEN describing the position is used in the URL
 Diagram graphic styles may be created and configured at any moment, without the need to change the code of the application. Please check the respective section below.
 
 The following styles are provided:
-1) default style (the diagram above)
-2) 'wiki' style:
+
+1) <code>default</code> style (the diagram above). This style is used if the <code>style</code> parameter is not set or empty, or if it is explicitly set to 'default'.
+
+2) <code>wiki</code> style:
 
 *TODO*: add wiki image style
 
-3) 'leipzig' style:
+3) <code>leipzig</code> style:
 
 *TODO*: add leipzig image style
 
-4) text style - ASCII representation of the chess board
+4) <code>text</code> style - ASCII representation of the chess board
 
 ```
 ---------------------------------
@@ -66,4 +69,34 @@ The following styles are provided:
 | R | N | B | Q | K | B | N | R |
 ---------------------------------
 ```
+
+
+Thus, the URL pattern to call the service is the following:
+```
+{host}/fen2chessboard-rs/fen2cb/{FEN-position}/{side}[;size=int][;style=string]
+```
+
+<h3>Errors Management</h3>
+
+The following client-side errors are intercepted by the application:
+
+1) Invalid FEN in the URL. In this case, the application will return a message like
+
+```
+Invalid FEN string: 'rnbqkbnr/ppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/w'
+```
+
+2) Invalid style identifier. In this case, the application will return a message like
+
+```
+Failed to find the style 'wiky'. Please check its name.
+```
+
+3) Invalid size value. In this case, the application will return a message like
+
+```
+Invalid size: 10000. Must be between 0 and 2048.
+```
+
+<code>size=0</code> is interpreted as default size, which corresponds to the size of the source chess board image.
 
