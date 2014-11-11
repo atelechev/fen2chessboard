@@ -47,8 +47,9 @@ public class Fen2Chessboard {
 		assert style != null;
 		final RasterRenderer renderer = new RasterRenderer(style);
 		final BufferedImage diagram = renderer.renderDiagram(fen, size);
-		return Response.ok(new RasterStreamingOutput(diagram), 
-						   "image/png").build();
+		return Response.ok(new RasterStreamingOutput(diagram), "image/png")
+					   .header("Content-Disposition", "filename=diagram.png")
+					   .build();
 	}
 	
 }
