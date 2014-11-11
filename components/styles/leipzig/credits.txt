@@ -1,0 +1,1 @@
+This style was built from the freeware TTF chess font "Leipzip", available at http://www.enpassant.dk/chess/fonteng.htm and http://www.enpassant.dk/chess/fontimg/leipzig.htm
