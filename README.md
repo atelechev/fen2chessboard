@@ -1,7 +1,7 @@
 <h2>FEN2Chessboard</h2>
 ==============
 
-This is a simple Web application that provides chess position diagrams generated from <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">Forsyth-Edwards notation (FEN)</a> strings.
+This is a simple Web application that generates chess diagrams from <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">Forsyth-Edwards notation (FEN)</a> strings.
 
 It runs as a RESTful Web service: you provide your FEN string in the URL, as well as some other optional parameters, and you receive an image with the diagram.
 
@@ -73,7 +73,7 @@ The following styles are provided:
 
 Thus, the URL pattern to call the service is the following:
 ```
-{host}/fen2chessboard-rs/fen2cb/{FEN-position}/{side}[;size=int][;style=string]
+{host}/fen2chessboard-rs/fen2cb/{FEN-position}[/side][;size=int][;style=string]
 ```
 
 <h3>Errors Management</h3>
@@ -193,6 +193,8 @@ The style conventions are the following.
 
 ![Empty board with margins](/docs/images/diagram_empty_leipzig.png?raw=true "board.png example 2")
 
+The top-left corner of the a8 square in this board starts at pixel 16, so the top and the left margins (or paddings) should have the value of 15.
+
 8) The following files must be present in the folder with the style:
 
 ```
@@ -213,6 +215,7 @@ The style conventions are the following.
 These files contain images with chess pieces, their names are explicit.
 The size of all the piece images must be the same. For example, in the default style, all the <code>black_*</code> and <code>white_*</code> images have the size of 108x108 pixels.
 If this is not respected, the style will not be initialized properly.
+
 The size of all of these images must also be the same as the size of a square in the empty board image.
 
 9) Add into the folder a configuration file named <code>diagram.properties</code>, with the following key-value pairs:
