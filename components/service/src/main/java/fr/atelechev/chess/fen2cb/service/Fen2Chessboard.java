@@ -19,6 +19,8 @@ import fr.atelechev.chess.fen2cb.style.RasterStyle;
 @Path("fen2cb")
 public class Fen2Chessboard {
 
+	private static final int SIZE_MAX = 2048;
+	
 	private final StyleProvider styleProvider;
 	
 	public Fen2Chessboard() {
@@ -34,6 +36,9 @@ public class Fen2Chessboard {
 		final Fen fen = Fen.fromPath(strFen);
 		if ("text".equalsIgnoreCase(styleName)) {
 			return Response.ok(fen.toString(), MediaType.TEXT_PLAIN).build();
+		}
+		if (size < 0 || size > SIZE_MAX) {
+			throw new Fen2ChessboardException(String.format("Invalid size: %1$s. Must be between 0 and %2$s.", size, SIZE_MAX));
 		}
 		final DiagramStyle diagramStyle = this.styleProvider.getStyleByName(styleName);
 		if (diagramStyle instanceof RasterStyle) {
