@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>fr.atelechev.chess</groupId>
 		<artifactId>fen2chessboard-aggregate</artifactId>
-		<version>0.2-SNAPSHOT</version>
+		<version>0.2</version>
 		<relativePath>../..</relativePath>
 	</parent>
 
