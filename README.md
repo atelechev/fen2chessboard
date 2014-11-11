@@ -22,7 +22,7 @@ http://localhost:8080/fen2chessboard-rs/fen2cb/rnbqkbnr/pppppppp/8/8/8/8/PPPPPPP
 
 And you get the image:
 
-*TODO*: add the image
+![Default diagram style](/docs/images/diagram_default.png?raw=true "Default Diagram Style")
 
 Please note that only the part of FEN that describes the position is used in the URL. The side to move ('w' or 'b') element may be used to flip the view. Other FEN items (castling, en passant) are not used.
 
@@ -42,11 +42,11 @@ The following styles are provided:
 
 2) <code>wiki</code> style:
 
-*TODO*: add wiki image style
+![Wiki diagram style](/docs/images/diagram_wiki.png?raw=true "Wiki Diagram Style")
 
 3) <code>leipzig</code> style:
 
-*TODO*: add leipzig image style
+![Leipzig diagram style](/docs/images/diagram_leipzig.png?raw=true "Leipzig Diagram Style")
 
 4) <code>text</code> style - ASCII representation of the chess board
 
