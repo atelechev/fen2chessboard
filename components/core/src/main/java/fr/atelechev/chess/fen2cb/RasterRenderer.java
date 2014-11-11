@@ -31,7 +31,7 @@ public class RasterRenderer {
 			for (int fenItemIndex = 0; fenItemIndex < fenData[rowIndex].length; fenItemIndex++) {
 				final char fenValue = fenData[rowIndex][fenItemIndex];
 				if (Character.isDigit(fenValue)) {
-					final int nbSkippedItems = Integer.parseInt(String.valueOf(fenValue));
+					final int nbSkippedItems = fenValue - 48;
 					x += (nbSkippedItems * cellSize.getWidth());
 				}
 				else {
@@ -43,10 +43,22 @@ public class RasterRenderer {
 			}
 			y += cellSize.getHeight();
 		}
+		renderOverlay(g2);
 		g2.dispose();
 		return getResizedImage(board, size);
 	}
 	
+	private void renderOverlay(Graphics2D g2) {
+		assert g2 != null;
+		if (this.style.shouldDrawOverlay()) {
+			final Point overlayCoords = this.style.getOverlayOrigin();
+			g2.drawImage(this.style.getOverlayImage(),
+						 overlayCoords.getX(), 
+						 overlayCoords.getY(), 
+						 null);
+		}
+	}
+
 	private BufferedImage getResizedImage(BufferedImage rendered, int size) {
 		assert rendered != null;
 		if (size == 0) {

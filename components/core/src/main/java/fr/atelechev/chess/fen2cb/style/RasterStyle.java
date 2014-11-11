@@ -15,6 +15,8 @@ public class RasterStyle extends DiagramStyle {
 	
 	private final Dimension cellSize;
 	
+	private BufferedImage overlayImage;
+	
 	protected RasterStyle(String name, BufferedImage board, Map<Piece, BufferedImage> pieces) {
 		super(name);
 		assert board != null;
@@ -22,6 +24,7 @@ public class RasterStyle extends DiagramStyle {
 		this.board = board;
 		this.pieces = pieces;
 		this.cellSize = calculateCellSize();
+		this.overlayImage = null;
 	}
 	
 	private Dimension calculateCellSize() {
@@ -47,6 +50,18 @@ public class RasterStyle extends DiagramStyle {
 
 	public Dimension getCellSize() {
 		return cellSize;
+	}
+
+	public BufferedImage getOverlayImage() {
+		return overlayImage;
+	}
+
+	public void setOverlayImage(BufferedImage overlayImage) {
+		this.overlayImage = overlayImage;
+	}
+	
+	public boolean shouldDrawOverlay() {
+		return getOverlayOrigin() != null && this.overlayImage != null;
 	}
 	
 }

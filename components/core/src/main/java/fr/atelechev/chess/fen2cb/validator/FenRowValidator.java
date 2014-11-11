@@ -42,7 +42,7 @@ public class FenRowValidator {
 			case '6':
 			case '7':
 			case '8': {
-				return Integer.parseInt(String.valueOf(c));
+				return c - 48;
 			}
 			case 'P':
 			case 'R':

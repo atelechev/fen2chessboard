@@ -34,12 +34,23 @@ class RasterStyleFactory {
 	private RasterStyle build() {
 		final BufferedImage board = readBoard();
 		final Map<Piece, BufferedImage> pieces = readPieces();
+		final BufferedImage overlayImage = readOverlayImage();
 		final RasterStyle style = new RasterStyle(this.styleName, 
 												  board, 
 												  Collections.unmodifiableMap(pieces));
 		style.setCellsOrigin(this.padding);
 		style.setOverlayOrigin(this.overlay);
+		style.setOverlayImage(overlayImage);
 		return style;
+	}
+
+	private BufferedImage readOverlayImage() {
+		try {
+			return readImage("overlay.png");
+		} catch (IOException ex) {
+			// the overlay image is optional
+			return null;
+		}
 	}
 
 	private Map<Piece, BufferedImage> readPieces() {
