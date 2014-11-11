@@ -21,7 +21,13 @@ public class Fen {
 	}
 	
 	public char[][] getRows() {
-		return this.rows;
+		switch (this.side) {
+			case WHITE: return this.rows;
+			case BLACK: return getReversedRows();
+			default: {
+				throw new IllegalStateException("Must not have entered here.");
+			}
+		}
 	}
 	
 	public Side getSide() {
@@ -83,13 +89,7 @@ public class Fen {
 	@Override
 	public String toString() {
 		final StringBuilder bld = new StringBuilder(LINE.length() * 17).append(LINE);
-		final char[][] rowsForView;
-		if (this.side == Side.WHITE) {
-			rowsForView = this.rows;
-		}
-		else {
-			rowsForView = getReversedRows();
-		}
+		final char[][] rowsForView = getRows();
 		for (char[] row : rowsForView) {
 			bld.append(rowToString(row)).append(LINE);
 		}

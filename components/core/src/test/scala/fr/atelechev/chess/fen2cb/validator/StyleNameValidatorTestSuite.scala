@@ -1,8 +1,8 @@
-package fr.atelechev.chess.fen2cb.style
+package fr.atelechev.chess.fen2cb.validator
 
 import org.scalatest.FlatSpec
-import org.scalatest.Matchers.be
 import org.scalatest.Matchers.convertToAnyShouldWrapper
+import org.scalatest.Matchers.be
 
 class StyleNameValidatorTestSuite extends FlatSpec {
 

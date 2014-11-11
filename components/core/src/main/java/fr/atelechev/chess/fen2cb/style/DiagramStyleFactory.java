@@ -3,6 +3,7 @@ package fr.atelechev.chess.fen2cb.style;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import fr.atelechev.chess.fen2cb.validator.StyleNameValidator;
 import fr.atelechev.util.Objects;
 
 public class DiagramStyleFactory {

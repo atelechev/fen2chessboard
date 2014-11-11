@@ -1,8 +1,8 @@
-package fr.atelechev.chess.fen2cb.style;
+package fr.atelechev.chess.fen2cb.validator;
 
 import java.util.regex.Pattern;
 
-class StyleNameValidator {
+public class StyleNameValidator {
 
 	private static final Pattern PATTERN_NAME = Pattern.compile("^[0-9a-zA-Z_]+$");
 	
