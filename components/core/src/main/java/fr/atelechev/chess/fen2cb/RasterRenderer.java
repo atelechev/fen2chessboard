@@ -1,6 +1,7 @@
 package fr.atelechev.chess.fen2cb;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import fr.atelechev.chess.fen2cb.style.Dimension;
@@ -43,7 +44,21 @@ public class RasterRenderer {
 			y += cellSize.getHeight();
 		}
 		g2.dispose();
-		return board;
+		return getResizedImage(board, size);
+	}
+	
+	private BufferedImage getResizedImage(BufferedImage rendered, int size) {
+		assert rendered != null;
+		if (size == 0) {
+			// no scaling or default size
+			return rendered;
+		}
+		final Image scaledTmp = rendered.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+		final BufferedImage scaledRender = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+		final Graphics2D g2 = scaledRender.createGraphics();
+		g2.drawImage(scaledTmp, 0, 0, null);
+		g2.dispose();
+		return scaledRender;
 	}
 	
 }
