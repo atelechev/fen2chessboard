@@ -4,7 +4,7 @@
 
 	<groupId>fr.atelechev.chess</groupId>
 	<artifactId>fen2chessboard-aggregate</artifactId>
-	<version>0.2</version>
+	<version>0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>FEN to Chess Diagram Web Service</name>
