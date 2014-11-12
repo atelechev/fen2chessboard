@@ -3,11 +3,13 @@
 
 This is a simple Web application that generates chess diagrams from <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">Forsyth-Edwards notation (FEN)</a> strings.
 
+The core module can also be used as an autonomous library to generate chess diagrams. Please check the <a href="https://github.com/atelechev/fen2chessboard/tree/master/components/core">documentation of the module</a> for this use case.
+
 It runs as a RESTful Web service: you provide your FEN string in the URL, as well as some other optional parameters, and you receive an image with the diagram.
 
 For example:
 
-The application runs at http://localhost:8080/fen2chessboard-rs/fen2cb
+The application runs at <code>http://localhost:8080/fen2chessboard-rs/fen2cb</code>
 
 The FEN string for the starting position in chess is
 
@@ -26,6 +28,27 @@ And you get the image:
 
 Please note that only the part of FEN that describes the position is used in the URL. The side to move ('w' or 'b') element may be used to flip the view. Other FEN items (castling, en passant) are not used.
 
+==============
+
+<h3>Project Contents</h3>
+
+The project currently contains two modules and a folder with resources. They all are placed under <code>components</code> folder:
+
+```
+.
+├── components
+    ├── core
+    ├── service
+    └── styles
+```
+
+The <code><a href="https://github.com/atelechev/fen2chessboard/tree/master/components/core">core</a></code> module contains the main logic of the application and may be re-used as a library for chess diagrams generation.
+
+The <code><a href="https://github.com/atelechev/fen2chessboard/tree/master/components/service">service</a></code> module contains an implementation of a RESTful Web service based on <a href="https://jersey.java.net/">Jersey</a> framework.
+
+The <code><a href="https://github.com/atelechev/fen2chessboard/tree/master/components/styles">styles</a></code> folder contains the definitions of resources featured with the application: graphic diagram styles and their configuration.
+
+==============
 
 <h3>Options</h3>
 
@@ -76,6 +99,8 @@ Thus, the URL pattern to call the service is the following:
 {host}/fen2chessboard-rs/fen2cb/{FEN-position}[/side][;size=int][;style=string]
 ```
 
+==============
+
 <h3>Errors Management</h3>
 
 The following client-side errors are intercepted by the application:
@@ -100,6 +125,7 @@ Invalid size: 10000. Must be between 0 and 2048.
 
 <code>size=0</code> is interpreted as default size, which corresponds to the size of the source chess board image.
 
+==============
 
 <h3>Installation</h3>
 
@@ -166,6 +192,8 @@ mvn tomcat7:undeploy tomcat7:deploy
 Please check the respective Maven plugin configuration in <code>components/service/pom.xml</code>.
 
 Your application instance should be functional now.
+
+==============
 
 <h3>Styles Conventions</h3>
 
