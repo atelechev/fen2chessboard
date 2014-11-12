@@ -10,6 +10,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.atelechev.chess.fen2cb.Fen;
 import fr.atelechev.chess.fen2cb.RasterRenderer;
 import fr.atelechev.chess.fen2cb.exception.Fen2ChessboardException;
@@ -18,6 +21,8 @@ import fr.atelechev.chess.fen2cb.style.RasterStyle;
 
 @Path("fen2cb")
 public class Fen2Chessboard {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(Fen2Chessboard.class);
 
 	private static final int SIZE_MAX = 2048;
 	
@@ -33,6 +38,7 @@ public class Fen2Chessboard {
 	public Response getDiagram(@PathParam("fen") String strFen,
 							   @MatrixParam("size") int size,
 							   @MatrixParam("style") String styleName) throws Fen2ChessboardException {
+		LOGGER.debug("getDiagram() called with fen='{}', size={}, style='{}'.", strFen, size, styleName);
 		final Fen fen = Fen.fromPath(strFen);
 		if ("text".equalsIgnoreCase(styleName)) {
 			return Response.ok(fen.toString(), MediaType.TEXT_PLAIN).build();

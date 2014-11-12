@@ -56,4 +56,9 @@ public abstract class DiagramStyle {
 		return this.name.equalsIgnoreCase(((DiagramStyle) obj).name);
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("%1$s [name=%2$s]", this.getClass().getSimpleName(), this.name);
+	}
+	
 }

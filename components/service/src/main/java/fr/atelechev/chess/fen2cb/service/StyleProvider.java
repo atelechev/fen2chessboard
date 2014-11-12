@@ -23,14 +23,17 @@ public class StyleProvider {
 	private final Map<String, DiagramStyle> styleCache;
 	
 	private StyleProvider() {
+		LOGGER.debug("Initializing {}...", this.getClass().getSimpleName());
 		this.styleCache = new HashMap<>();
 		final DiagramStyle defaultStyle = readStyle(STYLE_NAME_DEFAULT);
 		if (defaultStyle != null) {
+			LOGGER.debug("Loaded {}", defaultStyle);
 			this.styleCache.put(STYLE_NAME_DEFAULT, defaultStyle);
 		}
 		else {
 			throw new IllegalStateException("Default diagram style is missing.");
 		}
+		LOGGER.debug("... {} initialized.", this.getClass().getSimpleName());
 	}
 	
 	public static StyleProvider getInstance() {
@@ -49,7 +52,9 @@ public class StyleProvider {
 		}
 		final DiagramStyle style = readStyle(styleName);
 		if (style != null) {
+			LOGGER.debug("Loaded {}", style);
 			this.styleCache.put(styleName, style);
+			LOGGER.debug("{} styles cached.", this.styleCache.size());
 			return style;
 		}
 		throw new MissingStyleException(styleName);
@@ -62,6 +67,7 @@ public class StyleProvider {
 			return DiagramStyleFactory.buildStyle(styleName, stylesRoot);
 		} catch (IllegalArgumentException | IllegalStateException ex) {
 			LOGGER.error("Failed to build a DiagramStyle: {}", ex.getMessage());
+			LOGGER.error("Exception trace:", ex);
 			return null;
 		}
 	}
