@@ -54,7 +54,7 @@ The <code><a href="https://github.com/atelechev/fen2chessboard/tree/master/compo
 
 * Flip the board by adding <code>/b</code> or <code>/B</code> to the URL. Default is the view for White (<code>/w</code> or <code>/W</code> is implicit at the end of the URL, but may be added).
 
-* Request a specific size of the image by adding <code>;size=X</code> to the URL, where <code>X</code> is the number of pixels for the height or the width of the diagram. Diagrams are square, so there is no need to have two parameters for that.
+* Request a specific size of the image by adding <code>;size=X</code> to the URL, where <code>X</code> is the number of pixels for the height or the width of the diagram. Diagrams are square, so there is no need to have two separate parameters for that. <code>size=0</code> is interpreted as default size, which corresponds to the size of the source chess board image.
 
 * Request a specific graphic style for the image by adding <code>;style=N</code> to the URL, where <code>N</code> is the name of the style.
 Diagram graphic styles may be created and configured at any moment, without the need to change the code of the application. To modify an existing style or create a new one, please <a href="https://github.com/atelechev/fen2chessboard/tree/master/components/styles">check the documentation</a>.
@@ -103,27 +103,25 @@ Thus, the URL pattern to call the service is the following:
 
 <h3>Errors Management</h3>
 
-The following client-side errors are intercepted by the application:
+If an error occurs, the application replies with a JSON message (<code>application/json</code> MIME type) having the following structure:
+```
+{
+    "status": [HTTP response code],
+    "message": [error message]
+}
+```
 
-1) Invalid FEN in the URL. In this case, the application will return a message like
+Typical messages for client-side error reponses are:
 
 ```
 Invalid FEN string: 'rnbqkbnr/ppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/w'
-```
 
-2) Invalid style identifier. In this case, the application will return a message like
-
-```
 Failed to find the style 'wiky'. Please check its name.
-```
 
-3) Invalid size value. In this case, the application will return a message like
-
-```
 Invalid size: 10000. Must be between 0 and 2048.
 ```
 
-<code>size=0</code> is interpreted as default size, which corresponds to the size of the source chess board image.
+They are sent if at least one of the request parameters is invalid.
 
 ==============
 
