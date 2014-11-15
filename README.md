@@ -99,7 +99,7 @@ Thus, the URL pattern to call the service is the following:
 {host}/fen2chessboard-rs/fen2cb/{FEN-position}[/side][;size=int][;style=string]
 ```
 
-You can try a <a href="http://www.antot.fr:8080/fen2chessboard-rs/fen2cb/r1bqkbnr/pp1ppppp/2n5/2p5/3PP3/5N2/PPP2PPP/RNBQKB1R/w;style=leipzig" target="_blank">demo version of the service</a>.
+You can try in action a <a href="http://www.antot.fr/fen2chessboard-rs/fen2cb/r1bqkbnr/pp1ppppp/2n5/2p5/3PP3/5N2/PPP2PPP/RNBQKB1R/w;style=leipzig;size=300" target="_blank">demo version of the service</a>.
 
 ==============
 
