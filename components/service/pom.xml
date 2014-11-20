@@ -49,6 +49,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>fr.atelechev</groupId>
+			<artifactId>utils-at-web</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-processing</artifactId>
 		</dependency>
